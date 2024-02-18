@@ -1,5 +1,8 @@
 package com.feb.jdbc.entity;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("Member")
 public class Member {
 	int memberIdx;
 	String memberId;

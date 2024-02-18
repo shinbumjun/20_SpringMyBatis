@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.feb.jdbc.dao.MemberDao">
+
+	<!-- public int join(HashMap<String, String> params); -->
+	<insert id="join" parameterType="java.util.HashMap">
+		INSERT INTO lecture.member (member_id, passwd, email, join_dtm)
+		VALUES(#{memberId}, #{passwd}, #{email}, to_char(now(), 'YYYYMMDDHH24MISS'))
+	</insert>
+
+	<!-- public int delete(String memberId); -->
+	<delete id="delete" parameterType="String">
+		DELETE FROM lecture.member
+   		WHERE member_id = #{memberId}
+	</delete>
+
+</mapper>

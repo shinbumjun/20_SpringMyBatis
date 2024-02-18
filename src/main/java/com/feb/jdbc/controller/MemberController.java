@@ -24,6 +24,29 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
+	
+	@ResponseBody // 0 or 1 받음 완료
+	@RequestMapping("/deleteMamber.do")
+	private ModelAndView deleteMember(@RequestParam HashMap<String, String> params) {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		String memberId = params.get("memberId");
+		System.out.println("memberId11111111111111111111111 : " +memberId);
+		
+		// http://localhost:8088/spring/deleteMamber.do?memberId=s123s123s
+		int result = memberService.delete(memberId);
+		System.out.println("result11111111111111111111111 : " +result);
+		
+		mv.setViewName("/common/broker");
+		mv.addObject("resultMsg", "");
+		mv.addObject("resultCode", "");
+		
+		return mv;
+	}
+	
+	
+	
 	@ResponseBody
 	@RequestMapping("/findMember.do")
 	public String findMember(@RequestParam HashMap<String, String> params) {
@@ -76,9 +99,9 @@ public class MemberController {
 }
 
 // spring-jdbc/findPw.do?memberId=whdudgms&email=whdudgms123@naver.com
-//http://localhost:8080/spring-jdbc/findPw.do?memberId=jyeory&email=jyeory@gmail.com
+//http://localhost:8088/spring-jdbc/findPw.do?memberId=jyeory&email=jyeory@gmail.com
 
-//http://localhost:8080/spring-jdbc/findPw.do?memberId=whdudgms&email=whdu@naver.com
+//http://localhost:8088/spring-jdbc/findPw.do?memberId=whdudgms&email=whdu@naver.com
 
 
 

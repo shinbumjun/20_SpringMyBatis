@@ -31,18 +31,15 @@ public class LoginController {
     	ModelAndView mv = new ModelAndView();
     	
     	boolean result = loginService.login(params);
+	
     	if(result) {
 			mv.addObject("resultMsg", "로그 성공");
 			mv.addObject("resultCode", "loginOk");
-
- 
     	}else {
-
     		mv.addObject("resultMsg", "로그인실패");
 			mv.addObject("resultCode", "loginFail");
 
     	}
-
     	return mv;
     }
     

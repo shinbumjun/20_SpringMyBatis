@@ -1,9 +1,11 @@
 package com.feb.jdbc.service;
 
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.feb.jdbc.dao.MemberDao;
 import com.feb.jdbc.dto.EmailDto;
@@ -11,16 +13,18 @@ import com.feb.jdbc.entity.Member;
 import com.feb.jdbc.util.EmailUtil;
 import com.feb.jdbc.util.Sha512Encoder;
 
+@Service
 public class MemberService {
 	
 	public MemberService() {}
 	
+	@Autowired
 	private MemberDao memberDao;
 	
-	public MemberService(MemberDao memberDao) {
-		System.out.println(memberDao);
-		this.memberDao = memberDao;
-	}
+//	public MemberService(MemberDao memberDao) {
+//		System.out.println(memberDao);
+//		this.memberDao = memberDao;
+//	}
 
 	private EmailUtil emailUtil;
 	public void setEmailUtil(EmailUtil emailUtil) {
@@ -36,6 +40,11 @@ public class MemberService {
 	}
 	
 	public int join(HashMap<String, String> params) {
+		Sha512Encoder encoder = Sha512Encoder.getInstance();
+		String passwd = params.get("passwd");
+		String encodeTxt = encoder.getSecurePassword(passwd);
+		params.put("passwd", encodeTxt); // 암호화한 패쓰워드 추가 
+		
 		return memberDao.join(params);
 	}
 	
@@ -94,6 +103,11 @@ public class MemberService {
 			return false;
 		}    
 
+	}
+
+	public int delete(String memberId) {
+		System.out.println("memberId2222222222222222222222 :" + memberId);
+		return memberDao.delete(memberId);
 	}
 }
 

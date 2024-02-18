@@ -3,8 +3,11 @@ package com.feb.jdbc.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.springframework.stereotype.Repository;
+
 import com.feb.jdbc.entity.Member;
 
+@Repository
 public interface MemberDao {
 	
 	public HashMap<String, Object> findMember(String memberId);
@@ -22,4 +25,8 @@ public interface MemberDao {
 	public int findMember(String memberId, String email);
 	
 	public int updatePasswd(String passwd, String memberId, String email);
+	
+	
+	// 삭제
+	public int delete(String memberId);
 }

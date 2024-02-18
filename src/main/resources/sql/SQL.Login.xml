@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.feb.jdbc.dao.LoginDao">
+
+	<!-- public Member login(String memberId); -->
+	<!-- resultType은 반드시 있어야 함 -->
+	<select id="login" parameterType="String" resultType="Member">
+		select * 
+		from lecture.member
+		where member_id = #{memberId}
+	</select>
+
+	
+
+</mapper>
